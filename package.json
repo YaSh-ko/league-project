@@ -8,6 +8,7 @@
       "typescript": {}
     }
   },
+  "homepage": ".",
   "scripts": {
     "dev": "webpack serve --progress --config ./config/webpack.config.dev.js",
     "build": "webpack --mode=production --progress --config ./config/webpack.config.prod.js ",
