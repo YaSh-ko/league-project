@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetTodoByIdQuery, useUpdateTodoMutation } from 'api/todosApi';
-import { Todo, updateTodoDto } from 'types/Todo';
+import { Todo, UpdateTodoDto } from 'types/todo.types';
 
 export function EditTodo() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { data: todo, error, isLoading } = useGetTodoByIdQuery(Number(id));
   const [updateTodo] = useUpdateTodoMutation();
-  const [updatedTodo, setUpdatedTodo] = useState<updateTodoDto>({
-    id: Number(id),
+  const [updatedTodo, setUpdatedTodo] = useState<UpdateTodoDto>({
+    name: '',
+    info: '',
+    isImportant: false,
+    isCompleted: false,
   });
 
   useEffect(() => {
@@ -32,7 +35,8 @@ export function EditTodo() {
 
   const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateTodo(updatedTodo);
+
+    updateTodo({ id: Number(id), todo: updatedTodo });
     navigate('/');
   };
 
@@ -56,8 +60,8 @@ export function EditTodo() {
         value={updatedTodo.info}
         placeholder="Введите описание задачи"
       />
-      <input type="checkbox" name="isImportant" onChange={handlerChange} value={String(updatedTodo.isImportant)} />
-      <input type="checkbox" name="isCompleted" onChange={handlerChange} value={String(updatedTodo.isCompleted)} />
+      <input type="checkbox" name="isImportant" onChange={handlerChange} checked={updatedTodo.isImportant} />
+      <input type="checkbox" name="isCompleted" onChange={handlerChange} checked={updatedTodo.isCompleted} />
       <button type="submit">Добавить</button>
     </form>
   );

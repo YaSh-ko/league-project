@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCreateTodoMutation } from 'api/todosApi';
-import { createTodoDto } from 'types/Todo';
+import { CreateTodoDto } from 'types/todo.types';
 
 export function AddTodo() {
   const navigate = useNavigate();
-  const [newTodo, setNewToodo] = useState<createTodoDto>({
+  const [newTodo, setNewToodo] = useState<CreateTodoDto>({
     name: '',
     info: '',
     isImportant: false,
@@ -43,7 +43,7 @@ export function AddTodo() {
         value={newTodo.info}
         placeholder="Введите описание задачи"
       />
-      <input type="checkbox" name="isImportant" onChange={handlerChange} value={String(newTodo.isImportant)} />
+      <input type="checkbox" name="isImportant" onChange={handlerChange} checked={newTodo.isImportant} />
 
       <button type="submit">Добавить</button>
     </form>
