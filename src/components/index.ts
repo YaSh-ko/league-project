@@ -8,7 +8,7 @@ export type { SearchInputProps } from './SearchInput/SearchInput.types';
 export { TextField } from './TextField';
 export type { TextFieldProps } from './TextField/TextField.types';
 
-export { Checkbox } from './Checkbox';
+export { CustomCheckbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox/Checkbox.types';
 
 export { Loader } from './Loader';

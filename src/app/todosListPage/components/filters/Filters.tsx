@@ -49,6 +49,13 @@ export function Filters({ filter, onChooseFilter, search, onChangeSearch }: Filt
         sx={filterStyle}>
         Важные
       </ToggleButton>
+      <ToggleButton
+        value="active"
+        selected={filter === 'active'}
+        onClick={() => onChooseFilter('active')}
+        sx={filterStyle}>
+        Активные
+      </ToggleButton>
 
       <ToggleButton
         value="completed"

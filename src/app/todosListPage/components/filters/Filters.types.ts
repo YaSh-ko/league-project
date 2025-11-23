@@ -1,4 +1,4 @@
-export type TodoFilter = 'all' | 'important' | 'completed';
+export type TodoFilter = 'all' | 'important' | 'completed' | 'active';
 
 export interface FiltersProps {
   filter: TodoFilter;
