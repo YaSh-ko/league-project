@@ -7,4 +7,4 @@ export type UpdateTodoDto = components['schemas']['UpdateTask'];
 export type ApiError = components['schemas']['Error'];
 
 // ==================== ПАРАМЕТРЫ ====================
-export type GetTodoParams = paths['/tasks']['get']['parameters'];
+export type GetTodoParams = NonNullable<NonNullable<paths['/tasks']['get']['parameters']>['query']>;
