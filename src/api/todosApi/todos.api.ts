@@ -10,12 +10,11 @@ export const todosApi = createApi({
     getTodos: build.query<Todo[], GetTodoParams>({
       query: (filters) => {
         const params = new URLSearchParams();
-        if (filters?.query) {
-          const filtersParams = filters.query;
-          if (filtersParams.name_like !== undefined) params.append('name_like', filtersParams.name_like);
-          if (filtersParams.isCompleted !== undefined) params.append('isCompleted', String(filtersParams.isCompleted));
-          if (filtersParams.isImportant !== undefined) params.append('isImportant', String(filtersParams.isImportant));
-        }
+        console.log(filters);
+        if (filters.name_like !== undefined) params.append('name_like', filters.name_like);
+        if (filters.isCompleted !== undefined) params.append('isCompleted', String(filters.isCompleted));
+        if (filters.isImportant !== undefined) params.append('isImportant', String(filters.isImportant));
+        console.log(params);
         return `/tasks?${params}`;
       },
       providesTags: (result) =>
@@ -41,7 +40,7 @@ export const todosApi = createApi({
         method: 'PATCH',
         body: todo,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Todo', id: id }],
+      invalidatesTags: [{ type: 'Todo', id: 'LIST' }],
     }),
     deleteTodo: build.mutation<Todo, number>({
       query: (id) => ({

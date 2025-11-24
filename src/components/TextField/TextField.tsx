@@ -1,30 +1,35 @@
 import React from 'react';
-import { TextFieldProps } from './TextField.types';
-import './TextField.css';
+import { TextField } from '@mui/material';
 
-export function TextField({
+import { TextFieldProps } from './TextField.types';
+
+const textFiledStyle = {
+  '& .MuiOutlinedInput-root': {
+    backgroundColor: 'secondary.main',
+    borderRadius: 2,
+    boxShadow: '0 0px 4px rgba(0,0,0,0.1)',
+  },
+};
+
+export function CustomTextField({
+  name,
   label,
   placeholder,
-  containerClassName = '',
   inputType,
   value,
+  color = 'primary',
   onChange,
   errorText,
 }: TextFieldProps) {
   return (
-    <div className={`mb-3 ${containerClassName}`}>
-      <label htmlFor={label} className="form-label">
-        {label}
-      </label>
-      <input
-        type={inputType}
-        className="form-control"
-        id={label}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-      {errorText && <div className="invalid">{errorText}</div>}
-    </div>
+    <TextField
+      name={name}
+      variant="outlined"
+      label={label}
+      value={value}
+      placeholder={placeholder}
+      onChange={onChange}
+      color={color === 'primary' ? 'primary' : 'secondary'}
+      sx={textFiledStyle}></TextField>
   );
 }
