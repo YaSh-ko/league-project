@@ -1,20 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Todo, CreateTodoDto, UpdateTodoDto, GetTodoParams } from 'types/todo.types';
-const API_URL = 'https://tasks-service-maks1394.amvera.io';
 
 export const todosApi = createApi({
   reducerPath: 'todosApi',
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.APP_BASE_API_URL }),
   tagTypes: ['Todo'],
   endpoints: (build) => ({
     getTodos: build.query<Todo[], GetTodoParams>({
       query: (filters) => {
         const params = new URLSearchParams();
-        console.log(filters);
         if (filters.name_like !== undefined) params.append('name_like', filters.name_like);
         if (filters.isCompleted !== undefined) params.append('isCompleted', String(filters.isCompleted));
         if (filters.isImportant !== undefined) params.append('isImportant', String(filters.isImportant));
-        console.log(params);
         return `/tasks?${params}`;
       },
       providesTags: (result) =>

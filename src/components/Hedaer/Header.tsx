@@ -23,11 +23,11 @@ export function Header() {
         </Typography>
 
         {isListPage ? (
-          <Button variant="contained" color="primary" onClick={() => navigate('todos/new')}>
+          <Button variant="contained" onClick={() => navigate('todos/new')}>
             + Добавить задачу
           </Button>
         ) : (
-          <Button variant="contained" color="primary" onClick={() => navigate('/')}>
+          <Button variant="contained" onClick={() => navigate('/')}>
             Вернуться к списку
           </Button>
         )}

@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/system';
 import { CssBaseline } from '@mui/material';
 import { EditTodo } from './app/editTodo';
-import { AddTodo } from './app/addTodo';
+import { AddTodoPage } from './app/addTodoPage';
 import { TodosListPage } from './app/todosListPage';
 import { lightTheme } from './theme/theme';
 import { Layout } from 'components/Layout/Layout';
@@ -22,7 +22,7 @@ export function App() {
             path="/todos/new"
             element={
               <Layout>
-                <AddTodo />
+                <AddTodoPage />
               </Layout>
             }></Route>
           <Route
