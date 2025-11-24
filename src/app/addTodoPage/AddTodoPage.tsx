@@ -1,35 +1,24 @@
-import { useNavigate } from 'react-router-dom';
-import { Container, Snackbar } from '@mui/material';
-import { useState } from 'react';
-import { AddTodoForm } from './components/AddTodoForm/AddTodoForm';
 import { useCreateTodoMutation } from 'api/todosApi';
 import { CreateTodoDto } from 'types/todo.types';
 import { PageContainer } from 'components/PageContainer';
+import { TodoForm } from 'components/todoForm/TodoForm';
+import { useSnackbar } from 'src/context/SnackBarContext/SnackBarContext';
+
 export function AddTodoPage() {
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const { showSnackbar } = useSnackbar();
   const [createTodo] = useCreateTodoMutation();
   const handlerSubmit = async (newTodo: CreateTodoDto) => {
     try {
       await createTodo(newTodo).unwrap();
-      setSnackbarOpen(true);
+      showSnackbar('Задача успешно добавлена!');
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
-
   return (
     <PageContainer>
-      <AddTodoForm onSubmit={handlerSubmit} />
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-        message="Задача успешно создана!"
-      />
+      <TodoForm onSubmit={handlerSubmit} isEdit={false} />
     </PageContainer>
   );
 }
