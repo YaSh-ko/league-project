@@ -16,9 +16,10 @@ const activeCheckboxStyle = {
   overflow: 'visible',
   borderColor: 'green',
 };
-export function CustomCheckbox({ label, checked, onChange }: CheckboxProps) {
+export function CustomCheckbox({ name, label, checked, onChange }: CheckboxProps) {
   return (
     <Checkbox
+      name={name}
       checked={checked}
       onChange={onChange}
       icon={<Box sx={checkboxStyle}></Box>}

@@ -1,11 +1,12 @@
 import { ChangeEventHandler, HTMLInputTypeAttribute } from 'react';
 
 export interface TextFieldProps {
-  label: string;
+  name?: string;
+  label?: string;
   placeholder?: string;
   inputType?: HTMLInputTypeAttribute;
-  containerClassName?: string;
-  value?: string;
+  value?: string | number;
+  color?: 'primary' | 'secondary';
   onChange?: ChangeEventHandler<HTMLInputElement>;
   errorText?: string;
 }

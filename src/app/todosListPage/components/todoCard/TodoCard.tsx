@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { TodoCardProps } from './TodoCard.types';
 import { CustomCheckbox } from 'components/Checkbox';
 
-export function TodoCard({ todo, onUpdateTodo }: TodoCardProps) {
+export function TodoCard({ todo, onUpdateTodo, onDeleteTodo }: TodoCardProps) {
   const navigate = useNavigate();
 
   const cardStyle = {
@@ -52,7 +52,7 @@ export function TodoCard({ todo, onUpdateTodo }: TodoCardProps) {
             <IconButton onClick={() => navigate(`todos/${todo.id}/edit`)}>
               <EditIcon sx={{ color: 'primary' }} />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={() => onDeleteTodo(Number(todo.id))}>
               <DeleteOutlineIcon sx={{ color: '#E53935' }} />
             </IconButton>
           </Box>

@@ -2,11 +2,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { TodosList } from './components/todoList/TodosList';
 import { Filters } from './components/filters/Filters';
 import { TodoFilter } from './components/filters/Filters.types';
-import { useGetTodosQuery, useUpdateTodoMutation } from 'api/todosApi';
+import { useDeleteTodoMutation, useGetTodosQuery, useUpdateTodoMutation } from 'api/todosApi';
 import { GetTodoParams, Todo, UpdateTodoDto } from 'types/todo.types';
 
 export function TodosListPage() {
   const [updateTodo] = useUpdateTodoMutation();
+  const [deleteTodo] = useDeleteTodoMutation();
   const [filter, setFilter] = useState<TodoFilter>('all');
   const [search, setSearch] = useState<string>('');
 
@@ -34,12 +35,21 @@ export function TodosListPage() {
     updateTodo({ id, todo });
   };
 
+  const handlerDeleteTodo = (id: number) => {
+    deleteTodo(id);
+  };
+
   if (isLoading) return <p>Загрузка...</p>;
 
   return (
     <div>
       <Filters filter={filter} onChooseFilter={setFilter} search={search} onChangeSearch={setSearch} />
-      <TodosList todos={sortedTodos} isFetching={isFetching} onUpdateTodo={handlerUpdateTodo} />
+      <TodosList
+        todos={sortedTodos}
+        isFetching={isFetching}
+        onUpdateTodo={handlerUpdateTodo}
+        onDeleteTodo={handlerDeleteTodo}
+      />
     </div>
   );
 }
