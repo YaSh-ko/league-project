@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { TodosList } from './components/todoList/TodosList';
 import { Filters } from './components/filters/Filters';
 import { TodoFilter } from './components/filters/Filters.types';
 import { useDeleteTodoMutation, useGetTodosQuery, useUpdateTodoMutation } from 'api/todosApi';
-import { GetTodoParams, Todo, UpdateTodoDto } from 'types/todo.types';
+import { GetTodoParams, UpdateTodoDto } from 'types/todo.types';
 
 export function TodosListPage() {
   const [updateTodo] = useUpdateTodoMutation();
@@ -31,7 +31,6 @@ export function TodosListPage() {
   }, [todos]);
 
   const handlerUpdateTodo = (id: number, todo: UpdateTodoDto) => {
-    console.log(id, todo);
     updateTodo({ id, todo });
   };
 
