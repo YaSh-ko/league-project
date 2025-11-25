@@ -1,11 +1,11 @@
-import { Container } from '@mui/system';
-import { LayoutProps } from './Layout.types';
-import { Header } from 'components/Hedaer/Header';
-export function Layout({ children }: LayoutProps) {
+import { ReactNode } from 'react';
+import { StyleContainer } from './LayoutStyles';
+import { Header } from 'components/Hedaer';
+export function Layout({ children }: { children: ReactNode }) {
   return (
-    <Container sx={{ marginTop: '50px' }} maxWidth="md">
+    <StyleContainer maxWidth="md">
       <Header />
       {children}
-    </Container>
+    </StyleContainer>
   );
 }

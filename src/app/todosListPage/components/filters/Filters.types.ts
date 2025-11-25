@@ -1,8 +1,8 @@
-export type TodoFilter = 'all' | 'important' | 'completed' | 'active';
+export type TodoFilterType = 'all' | 'important' | 'completed' | 'active';
 
 export interface FiltersProps {
-  filter: TodoFilter;
-  onChooseFilter: (filterData: TodoFilter) => void;
+  filter: TodoFilterType;
+  onChooseFilter: (filterData: TodoFilterType) => void;
   search: string;
   onChangeSearch: (search: string) => void;
 }

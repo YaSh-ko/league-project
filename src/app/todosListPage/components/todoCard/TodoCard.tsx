@@ -7,10 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { TodoCardProps } from './TodoCard.types';
 import { TodoItem } from './TodoCardStyle';
 import { CustomCheckbox } from 'components/Checkbox';
+import { useSnackbar } from 'src/context/SnackBarContext';
 
 export function TodoCard({ todo, onUpdateTodo, onDeleteTodo }: TodoCardProps) {
   const navigate = useNavigate();
-
+  const { showSnackbar } = useSnackbar();
   return (
     <TodoItem aria-label={`Задача: ${todo.name}. ${todo.isCompleted} ? Выполенена : Активна`}>
       <Box display="flex" flexDirection="column" width="100%">
@@ -41,7 +42,11 @@ export function TodoCard({ todo, onUpdateTodo, onDeleteTodo }: TodoCardProps) {
             <IconButton onClick={() => navigate(`todos/${todo.id}/edit`)}>
               <EditIcon />
             </IconButton>
-            <IconButton onClick={() => onDeleteTodo(Number(todo.id))}>
+            <IconButton
+              onClick={() => {
+                showSnackbar('Задача успешно удалена!');
+                onDeleteTodo(Number(todo.id));
+              }}>
               <DeleteOutlineIcon color="error" />
             </IconButton>
           </Box>

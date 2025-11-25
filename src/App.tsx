@@ -1,15 +1,18 @@
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/system';
 import { CssBaseline } from '@mui/material';
 import { EditTodo } from './app/editTodo';
 import { AddTodoPage } from './app/addTodoPage';
 import { TodosListPage } from './app/todosListPage';
-import { lightTheme } from './theme/theme';
-import { Layout } from 'components/Layout/Layout';
+import { SnackbarProvider } from './context/SnackBarContext';
+import { ThemeModeProvider } from './context/ThemeContext';
+import { Layout } from 'components/Layout';
+
 export function App() {
   return (
-    <ThemeProvider theme={lightTheme}>
-      <CssBaseline>
+    <ThemeModeProvider>
+      <CssBaseline />
+
+      <SnackbarProvider>
         <Routes>
           <Route
             path="/"
@@ -17,23 +20,28 @@ export function App() {
               <Layout>
                 <TodosListPage />
               </Layout>
-            }></Route>
+            }
+          />
+
           <Route
             path="/todos/new"
             element={
               <Layout>
                 <AddTodoPage />
               </Layout>
-            }></Route>
+            }
+          />
+
           <Route
             path="/todos/:id/edit"
             element={
               <Layout>
                 <EditTodo />
               </Layout>
-            }></Route>
+            }
+          />
         </Routes>
-      </CssBaseline>
-    </ThemeProvider>
+      </SnackbarProvider>
+    </ThemeModeProvider>
   );
 }
