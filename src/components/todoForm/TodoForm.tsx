@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import GradeIcon from '@mui/icons-material/Grade';
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
-import { TodoFormProps, AddTodoFormProps, EditTodoFormProps } from './TodoForm.types';
+import { TodoFormProps, EditTodoFormProps } from './TodoForm.types';
 import { CreateTodoDto, UpdateTodoDto } from 'types/todo.types';
 import { todoCreateSchema, todoUpdateSchema } from 'src/schemas/todoSchema';
 

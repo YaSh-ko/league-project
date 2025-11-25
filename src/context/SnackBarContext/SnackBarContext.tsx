@@ -1,14 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { Snackbar } from '@mui/material';
-
-type SnackbarContextType = {
-  showSnackbar: (message: string) => void;
-};
-
-type SnackbarState = {
-  open: boolean;
-  message: string;
-};
+import { SnackbarContextType, SnackbarState } from './SnackbarContext.types';
 
 const SnackbarContext = createContext<SnackbarContextType | undefined>(undefined);
 
@@ -16,10 +8,16 @@ export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
   const [snackbar, setSnackbar] = useState<SnackbarState>({
     open: false,
     message: '',
+    key: 0,
   });
 
   const showSnackbar = (message: string) => {
-    setSnackbar({ open: true, message });
+    if (snackbar) {
+      hideSnackbar();
+      setTimeout(() => setSnackbar({ open: true, message, key: Date.now() }), 50);
+    } else {
+      setSnackbar({ open: true, message, key: Date.now() });
+    }
   };
 
   const hideSnackbar = () => {
@@ -30,6 +28,7 @@ export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
     <SnackbarContext.Provider value={{ showSnackbar }}>
       {children}
       <Snackbar
+        key={snackbar.key}
         open={snackbar.open}
         autoHideDuration={6000}
         onClose={hideSnackbar}

@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { TodoForm } from 'components/todoForm/TodoForm';
+import { TodoForm } from 'components/TodoForm';
 import { useGetTodoByIdQuery, useUpdateTodoMutation } from 'api/todosApi';
 import { UpdateTodoDto } from 'types/todo.types';
 import { PageContainer } from 'components/PageContainer';
-import { useSnackbar } from 'src/context/SnackBarContext/SnackBarContext';
+import { useSnackbar } from 'src/context/SnackBarContext';
 
 export function EditTodo() {
   const { showSnackbar } = useSnackbar();

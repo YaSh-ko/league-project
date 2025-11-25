@@ -1,8 +1,8 @@
 import { useCreateTodoMutation } from 'api/todosApi';
 import { CreateTodoDto } from 'types/todo.types';
 import { PageContainer } from 'components/PageContainer';
-import { TodoForm } from 'components/todoForm/TodoForm';
-import { useSnackbar } from 'src/context/SnackBarContext/SnackBarContext';
+import { TodoForm } from 'components/TodoForm';
+import { useSnackbar } from 'src/context/SnackBarContext';
 
 export function AddTodoPage() {
   const { showSnackbar } = useSnackbar();

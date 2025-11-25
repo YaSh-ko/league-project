@@ -1,9 +1,9 @@
 import { List } from '@mui/material';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useEffect, useState } from 'react';
-import { TodoCard } from '../todoCard/TodoCard';
+import { TodoCard } from '../TodoCard/TodoCard';
 import { TodosListProps } from './TodosList.types';
-import { useDeleteTodoMutation } from 'api/todosApi';
+
 export function TodosList({ todos, isFetching, onUpdateTodo, onDeleteTodo }: TodosListProps) {
   const [debounceFetching, setDebounceFetching] = useState(false);
   const [parentAnimate] = useAutoAnimate({

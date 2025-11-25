@@ -1,37 +1,39 @@
-import { Toolbar, AppBar, Typography, Button } from '@mui/material';
+import { Typography, Button, IconButton, Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import { StyledAppBar, StyledToolbar } from './HeaderStyles';
+import { useThemeMode } from 'src/context/ThemeContext/ThemeContext';
 
 export function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const isListPage = location.pathname === '/';
+  const { mode, toggleTheme } = useThemeMode();
+
   return (
-    <AppBar
-      position="static"
-      color="transparent"
-      elevation={0}
-      sx={{
-        mb: 5,
-        py: 0,
-        '& .MuiToolbar-root': {
-          px: 0,
-        },
-      }}>
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Typography variant="h4" component="h1" fontWeight="bold">
+    <StyledAppBar position="static">
+      <StyledToolbar>
+        <Typography variant="h4" fontWeight="bold" color="text.primary">
           TaskManager
         </Typography>
 
-        {isListPage ? (
-          <Button variant="contained" onClick={() => navigate('todos/new')}>
-            + Добавить задачу
-          </Button>
-        ) : (
-          <Button variant="contained" onClick={() => navigate('/')}>
-            Вернуться к списку
-          </Button>
-        )}
-      </Toolbar>
-    </AppBar>
+        <Box display="flex" gap={2}>
+          <IconButton onClick={toggleTheme}>
+            {mode === 'light' ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
+          </IconButton>
+
+          {isListPage ? (
+            <Button variant="contained" onClick={() => navigate('todos/new')}>
+              + Добавить задачу
+            </Button>
+          ) : (
+            <Button variant="contained" onClick={() => navigate('/')}>
+              Вернуться к списку
+            </Button>
+          )}
+        </Box>
+      </StyledToolbar>
+    </StyledAppBar>
   );
 }

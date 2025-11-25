@@ -1,14 +1,13 @@
 import { useMemo, useState } from 'react';
-import { TodosList } from './components/todoList/TodosList';
-import { Filters } from './components/filters/Filters';
-import { TodoFilter } from './components/filters/Filters.types';
+import { TodosList } from './components/TodoList';
+import { Filters, TodoFilterType } from './components/Filters';
 import { useDeleteTodoMutation, useGetTodosQuery, useUpdateTodoMutation } from 'api/todosApi';
 import { GetTodoParams, UpdateTodoDto } from 'types/todo.types';
 
 export function TodosListPage() {
   const [updateTodo] = useUpdateTodoMutation();
   const [deleteTodo] = useDeleteTodoMutation();
-  const [filter, setFilter] = useState<TodoFilter>('all');
+  const [filter, setFilter] = useState<TodoFilterType>('all');
   const [search, setSearch] = useState<string>('');
 
   const queryParams: GetTodoParams = {
