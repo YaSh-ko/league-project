@@ -1,35 +1,45 @@
-import { Typography, Button, IconButton, Box } from '@mui/material';
+import { Typography, Button, IconButton, Box, useMediaQuery, useTheme } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import { StyledAppBar, StyledToolbar } from './HeaderStyles';
 import { useThemeMode } from 'src/context/ThemeContext/ThemeContext';
+import { useSnackbar } from 'src/context';
 
 export function Header() {
   const location = useLocation();
+
+  const { showSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const isListPage = location.pathname === '/';
   const { mode, toggleTheme } = useThemeMode();
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <StyledAppBar position="static">
       <StyledToolbar>
-        <Typography variant="h4" fontWeight="bold" color="text.primary">
+        <Typography component="h1" variant="h1" color="text.primary" title="Приложение для управления задачами">
           TaskManager
         </Typography>
 
         <Box display="flex" gap={2}>
-          <IconButton onClick={toggleTheme}>
+          <IconButton
+            onClick={() => {
+              toggleTheme();
+              showSnackbar(`Тема успешно сменена на ${mode === 'light' ? 'темную' : 'светлую'}`);
+            }}
+            aria-label={`Сменить тему на ${mode === 'light' ? 'темную' : 'светлую'}`}>
             {mode === 'light' ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
           </IconButton>
 
           {isListPage ? (
-            <Button variant="contained" onClick={() => navigate('todos/new')}>
-              + Добавить задачу
+            <Button fullWidth variant="contained" onClick={() => navigate('todos/new')}>
+              {isMobile ? 'Добавить' : '+ Добавить задачу'}
             </Button>
           ) : (
             <Button variant="contained" onClick={() => navigate('/')}>
-              Вернуться к списку
+              {isMobile ? 'Список' : 'Вернуться к списку'}
             </Button>
           )}
         </Box>

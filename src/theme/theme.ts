@@ -1,19 +1,20 @@
-import { createTheme, PaletteMode } from '@mui/material';
+import { createTheme, PaletteMode, responsiveFontSizes } from '@mui/material';
 
-export const createAppTheme = (mode: PaletteMode) =>
-  createTheme({
+export const createAppTheme = (mode: PaletteMode) => {
+  // Сначала создаем базовую тему
+  const theme = createTheme({
     typography: {
       fontFamily: '"Montserrat", sans-serif',
       button: {
         textTransform: 'none',
         fontWeight: 500,
       },
-      h1: { fontWeight: 600 },
-      h2: { fontWeight: 600 },
-      h3: { fontWeight: 600 },
-      h4: { fontWeight: 500 },
-      h5: { fontWeight: 500 },
-      h6: { fontWeight: 500 },
+      h1: { fontSize: 48, fontWeight: 800, '@media (max-width:400px)': { fontSize: 26 } },
+      h2: { fontSize: 32, fontWeight: 600 },
+      h3: { fontSize: 24, fontWeight: 600 },
+      h4: { fontSize: 22, fontWeight: 500 },
+      h5: { fontSize: 20, fontWeight: 500 },
+      h6: { fontSize: 16, fontWeight: 500 },
     },
 
     shape: { borderRadius: 8 },
@@ -46,6 +47,19 @@ export const createAppTheme = (mode: PaletteMode) =>
         },
       },
 
+      MuiTextField: {
+        variants: [
+          {
+            props: { size: 'small' },
+            style: {
+              '& .MuiInputBase-root': {
+                height: '50px',
+              },
+            },
+          },
+        ],
+      },
+
       MuiToggleButton: {
         styleOverrides: {
           root: ({ theme }) => ({
@@ -56,7 +70,7 @@ export const createAppTheme = (mode: PaletteMode) =>
             borderRadius: theme.shape.borderRadius,
             textTransform: 'none',
             boxShadow: '0 0px 4px rgba(0,0,0,0.1)',
-
+            maxHeight: '50px',
             '&.Mui-selected': {
               backgroundColor: theme.palette.primary.main,
               color: theme.palette.primary.contrastText,
@@ -64,7 +78,6 @@ export const createAppTheme = (mode: PaletteMode) =>
                 backgroundColor: theme.palette.primary.dark,
               },
             },
-
             '&:hover': {
               backgroundColor: theme.palette.action.hover,
             },
@@ -93,6 +106,10 @@ export const createAppTheme = (mode: PaletteMode) =>
       },
     },
   });
+
+  // Затем делаем шрифты адаптивными
+  return responsiveFontSizes(theme);
+};
 
 export const lightTheme = createAppTheme('light');
 export const darkTheme = createAppTheme('dark');

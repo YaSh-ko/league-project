@@ -1,28 +1,14 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { TodoForm } from 'components/TodoForm';
-import { useGetTodoByIdQuery, useUpdateTodoMutation } from 'api/todosApi';
-import { UpdateTodoDto } from 'types/todo.types';
+import { useGetTodoByIdQuery } from 'api/todosApi';
 import { PageContainer } from 'components/PageContainer';
-import { useSnackbar } from 'src/context/SnackBarContext';
+import { useEditTodo } from 'src/hooks/useEditTodo';
 
 export function EditTodo() {
-  const { showSnackbar } = useSnackbar();
-  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const todoId = Number(id);
   const { data: todo, error, isLoading } = useGetTodoByIdQuery(todoId);
-  const [updateTodo, { isLoading: isUpdating }] = useUpdateTodoMutation();
-
-  const handlerSubmit = async (data: UpdateTodoDto & { id: number }) => {
-    try {
-      await updateTodo({ id: Number(id), todo: data }).unwrap();
-      showSnackbar('Задача успешно отредактирована!');
-      navigate('/');
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { handleEditTodo, isEditing } = useEditTodo();
 
   if (isLoading) return <div>Загрузка задачи...</div>;
   if (error) return <div>Ошибка загрузки</div>;
@@ -31,7 +17,7 @@ export function EditTodo() {
   return (
     <PageContainer>
       <TodoForm
-        onSubmit={handlerSubmit}
+        onSubmit={handleEditTodo}
         todoId={todoId}
         defaultValues={{
           name: todo.name,
@@ -39,7 +25,7 @@ export function EditTodo() {
           isImportant: todo.isImportant,
           isCompleted: todo.isCompleted,
         }}
-        isSubmitting={isUpdating}
+        isSubmitting={isEditing}
         isEdit={true}
       />
     </PageContainer>

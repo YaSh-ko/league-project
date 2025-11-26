@@ -27,7 +27,6 @@ export function TodoForm(props: TodoFormProps) {
       name: '',
       info: '',
       isImportant: false,
-      ...(isEdit && { isCompleted: false }),
     },
   });
 
@@ -37,13 +36,8 @@ export function TodoForm(props: TodoFormProps) {
   const handlerFormSubmit = (data: CreateTodoDto | UpdateTodoDto) => {
     if (isEditForm(props)) {
       // Для редактирования добавляем id к данным
-      props.onSubmit({
-        ...(data as UpdateTodoDto),
-        id: props.todoId,
-      });
+      props.onSubmit(props.todoId, data as UpdateTodoDto);
     } else {
-      // Для создания передаем как есть
-      console.log(data);
       props.onSubmit(data as CreateTodoDto);
     }
   };
@@ -85,7 +79,12 @@ export function TodoForm(props: TodoFormProps) {
         label={<Box>{isImportant ? 'Важная задача' : 'Обычная задача'}</Box>}
       />
 
-      {isEdit && <FormControlLabel control={<Checkbox {...register('isCompleted')} />} label="Задача выполнена" />}
+      {isEdit && (
+        <FormControlLabel
+          control={<Checkbox checked={isCompleted} {...register('isCompleted')} />}
+          label="Задача выполнена"
+        />
+      )}
 
       <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
         {isEdit ? 'Сохранить изменения' : 'Добавить'}

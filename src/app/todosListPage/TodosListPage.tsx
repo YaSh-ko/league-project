@@ -1,53 +1,28 @@
-import { useMemo, useState } from 'react';
+import { Box } from '@mui/material';
 import { TodosList } from './components/TodoList';
-import { Filters, TodoFilterType } from './components/Filters';
-import { useDeleteTodoMutation, useGetTodosQuery, useUpdateTodoMutation } from 'api/todosApi';
-import { GetTodoParams, UpdateTodoDto } from 'types/todo.types';
+import { Filters } from './components/Filters';
+import { useGetTodosQuery } from 'api/todosApi';
+import { useTodosFilters } from 'src/hooks/useTodosFilters';
+import { useTodosOperations } from 'src/hooks/useTodosOperations';
+import { useTodosSort } from 'src/hooks/useTodosSort';
 
 export function TodosListPage() {
-  const [updateTodo] = useUpdateTodoMutation();
-  const [deleteTodo] = useDeleteTodoMutation();
-  const [filter, setFilter] = useState<TodoFilterType>('all');
-  const [search, setSearch] = useState<string>('');
-
-  const queryParams: GetTodoParams = {
-    ...(filter === 'all'
-      ? {}
-      : filter === 'important'
-      ? { isImportant: true }
-      : filter === 'completed'
-      ? { isCompleted: true }
-      : { isCompleted: false }),
-    ...{ name_like: search },
-  };
+  const { filter, search, setFilter, setSearch, queryParams } = useTodosFilters();
   const { data: todos = [], error, isLoading, isFetching } = useGetTodosQuery(queryParams);
-
-  const sortedTodos = useMemo(() => {
-    if (!todos.length) return [];
-
-    const sortedByImportant = [...todos].sort((a, b) => Number(b.isImportant) - Number(a.isImportant));
-    return sortedByImportant.sort((a, b) => Number(a.isCompleted) - Number(b.isCompleted));
-  }, [todos]);
-
-  const handlerUpdateTodo = (id: number, todo: UpdateTodoDto) => {
-    updateTodo({ id, todo });
-  };
-
-  const handlerDeleteTodo = (id: number) => {
-    deleteTodo(id);
-  };
+  const sortedTodos = useTodosSort(todos);
+  const { handleUpdateTodo, handleDeleteTodo } = useTodosOperations();
 
   if (isLoading) return <p>Загрузка...</p>;
 
   return (
-    <div>
+    <Box>
       <Filters filter={filter} onChooseFilter={setFilter} search={search} onChangeSearch={setSearch} />
       <TodosList
         todos={sortedTodos}
         isFetching={isFetching}
-        onUpdateTodo={handlerUpdateTodo}
-        onDeleteTodo={handlerDeleteTodo}
+        onUpdateTodo={handleUpdateTodo}
+        onDeleteTodo={handleDeleteTodo}
       />
-    </div>
+    </Box>
   );
 }

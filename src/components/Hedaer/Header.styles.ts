@@ -13,6 +13,7 @@ const StyledAppBar = styled(AppBar)`
 `;
 
 const StyledToolbar = styled(Toolbar)`
+  display: flex;
   justify-content: space-between;
 `;
 

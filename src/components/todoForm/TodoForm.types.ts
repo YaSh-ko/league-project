@@ -11,7 +11,7 @@ export interface AddTodoFormProps extends TodoFormBaseProps {
 }
 
 export interface EditTodoFormProps extends TodoFormBaseProps {
-  onSubmit: (data: UpdateTodoDto & { id: number }) => void;
+  onSubmit: (id: number, data: UpdateTodoDto) => void;
   todoId: number;
 }
 

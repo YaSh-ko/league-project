@@ -3,10 +3,12 @@ import { Checkbox } from '@mui/material';
 import { Box } from '@mui/system';
 import { CheckboxProps } from './Checkbox.types';
 import { CheckboxBase, CheckIconStyled } from './CheckboxStyle';
-export function CustomCheckbox({ name, checked, onChange }: CheckboxProps) {
-  console.log(checked);
+export function CustomCheckbox({ name, label, checked, onChange }: CheckboxProps) {
   return (
     <Checkbox
+      inputProps={{
+        'aria-label': label,
+      }}
       name={name}
       checked={checked}
       onChange={onChange}

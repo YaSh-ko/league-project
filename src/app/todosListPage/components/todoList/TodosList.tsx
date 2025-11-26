@@ -1,11 +1,10 @@
-import { List } from '@mui/material';
+import { Box, List, Typography } from '@mui/material';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { useEffect, useState } from 'react';
 import { TodoCard } from '../TodoCard/TodoCard';
 import { TodosListProps } from './TodosList.types';
+import { HiddenHeading } from 'components/HiddenHeading/HiddenHeading';
 
 export function TodosList({ todos, isFetching, onUpdateTodo, onDeleteTodo }: TodosListProps) {
-  const [debounceFetching, setDebounceFetching] = useState(false);
   const [parentAnimate] = useAutoAnimate({
     duration: 400, // ← увеличил время анимации
     easing: 'ease-in-out',
@@ -14,24 +13,13 @@ export function TodosList({ todos, isFetching, onUpdateTodo, onDeleteTodo }: Tod
     duration: 400, // ← увеличил время анимации
     easing: 'ease-in-out',
   });
-  useEffect(() => {
-    if (isFetching) {
-      setDebounceFetching(true);
-    } else {
-      const timerId = setTimeout(() => {
-        setDebounceFetching(false);
-      }, 300);
-      return () => clearTimeout(timerId);
-    }
-  }, [isFetching]);
-
-  // if (debounceFetching) {
-  //   return <p>Обновляем...</p>;
-  // }
   return (
-    <div ref={parentAnimate}>
+    <Box ref={parentAnimate} role="section" aria-labelledby="todos">
+      <HiddenHeading id="todos" level={2}>
+        Задачи
+      </HiddenHeading>
       {todos.length ? (
-        <List aria-label="Список задач" ref={listAnimate}>
+        <List role="list" aria-label="Задачи" ref={listAnimate} tabIndex={0}>
           {todos.map((todo) => (
             <TodoCard key={todo.id} todo={todo} onUpdateTodo={onUpdateTodo} onDeleteTodo={onDeleteTodo} />
           ))}
@@ -39,6 +27,6 @@ export function TodosList({ todos, isFetching, onUpdateTodo, onDeleteTodo }: Tod
       ) : (
         <p>Задач пока нет!</p>
       )}
-    </div>
+    </Box>
   );
 }

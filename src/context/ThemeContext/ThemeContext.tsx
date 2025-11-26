@@ -4,12 +4,13 @@ import { lightTheme, darkTheme } from 'src/theme';
 
 export interface ThemeContextType {
   mode: 'light' | 'dark';
-  toggleTheme?: () => void;
+  toggleTheme: () => void;
 }
-
 const ThemeContext = createContext<ThemeContextType>({
   mode: 'light',
-  toggleTheme: undefined,
+  toggleTheme: () => {
+    throw new Error('useThemeMode must be used within ThemeModeProvider');
+  },
 });
 
 const useThemeMode = () => useContext(ThemeContext);
