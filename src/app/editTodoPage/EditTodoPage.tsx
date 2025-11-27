@@ -4,7 +4,7 @@ import { useGetTodoByIdQuery } from 'api/todosApi';
 import { PageContainer } from 'components/PageContainer';
 import { useEditTodo } from 'src/hooks/useEditTodo';
 
-export function EditTodo() {
+export function EditTodoPage() {
   const { id } = useParams<{ id: string }>();
   const todoId = Number(id);
   const { data: todo, error, isLoading } = useGetTodoByIdQuery(todoId);

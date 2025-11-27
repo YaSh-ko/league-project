@@ -1,4 +1,3 @@
-// hooks/useMobileMenu.ts
 import { useState } from 'react';
 
 export function useMobileMenu() {

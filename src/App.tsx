@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
-import { EditTodo } from './app/editTodo';
+import { EditTodoPage } from './app/editTodoPage';
 import { AddTodoPage } from './app/addTodoPage';
 import { TodosListPage } from './app/todosListPage';
 import { SnackbarProvider } from './context/SnackBarContext';
@@ -36,7 +36,7 @@ export function App() {
             path="/todos/:id/edit"
             element={
               <Layout>
-                <EditTodo />
+                <EditTodoPage />
               </Layout>
             }
           />

@@ -37,6 +37,5 @@ export function errorHanlder(error: unknown, defaultMessage: string) {
     }
   }
 
-  // Любая другая ошибка
   return defaultMessage;
 }

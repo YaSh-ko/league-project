@@ -16,11 +16,8 @@ export function TodosListPage() {
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
-
     if (isFetching) {
-      timeoutId = setTimeout(() => {
-        setShowLoading(true);
-      }, 300);
+      timeoutId = setTimeout(() => setShowLoading(true), 300);
     } else {
       setShowLoading(false);
     }
@@ -36,6 +33,7 @@ export function TodosListPage() {
 
   return (
     <Box>
+      {/* Фильтры */}
       <Filters
         filter={filter}
         onChooseFilter={setFilter}
@@ -44,23 +42,19 @@ export function TodosListPage() {
         filterOptions={filterOptions}
       />
 
+      {/* Область задач + статус */}
       <Box aria-live="polite" aria-atomic="true" mt={2}>
         {isLoading && (
-          <Typography variant="body1" component="p" textAlign="center" color="text.secondary" py={4}>
+          <Typography textAlign="center" color="text.secondary" py={4}>
             Загрузка...
           </Typography>
         )}
         {error && (
-          <Typography variant="body1" component="p" textAlign="center" color="text.secondary" py={4}>
+          <Typography textAlign="center" color="text.secondary" py={4}>
             Ошибка загрузки
           </Typography>
         )}
-        {!isLoading && !error && sortedTodos.length === 0 && (
-          <Typography variant="body1" component="p" textAlign="center" color="text.secondary" py={4}>
-            Задач пока нет
-          </Typography>
-        )}
-        {!isLoading && !error && sortedTodos.length > 0 && (
+        {!isLoading && !error && (
           <TodosList
             todos={sortedTodos}
             showLoading={showLoading}

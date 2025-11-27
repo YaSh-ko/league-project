@@ -7,5 +7,5 @@ export const StyledContainer = styled(Container)(({ theme }: { theme?: Theme }) 
   paddingBottom: theme?.spacing(4),
   borderRadius: 15,
   boxShadow: '0 0 4px rgba(0, 0, 0, 0.1)',
-  maxWidth: 'md', // или theme.breakpoints.up('md')
+  maxWidth: 'md',
 }));
