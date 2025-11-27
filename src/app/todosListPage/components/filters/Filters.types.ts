@@ -5,4 +5,5 @@ export interface FiltersProps {
   onChooseFilter: (filterData: TodoFilterType) => void;
   search: string;
   onChangeSearch: (search: string) => void;
+  filterOptions: { value: TodoFilterType; label: string }[];
 }

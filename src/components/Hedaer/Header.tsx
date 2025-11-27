@@ -2,7 +2,7 @@ import { Typography, Button, IconButton, Box, useMediaQuery, useTheme } from '@m
 import { useLocation, useNavigate } from 'react-router-dom';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import { StyledAppBar, StyledToolbar } from './HeaderStyles';
+import { StyledAppBar, StyledToolbar } from './Header.styles';
 import { useThemeMode } from 'src/context/ThemeContext/ThemeContext';
 import { useSnackbar } from 'src/context';
 

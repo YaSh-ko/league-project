@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { Box } from '@mui/material';
+import { Box, Theme } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 
-const CheckboxBase = styled(Box)<{ checked?: boolean }>`
+const CheckboxBase = styled(Box)<{ checked?: boolean; theme?: Theme }>`
   width: 24px;
   height: 24px;
   border: 2px solid ${(props) => (props.checked ? '#4caf50' : 'gray')};
@@ -15,14 +15,26 @@ const CheckboxBase = styled(Box)<{ checked?: boolean }>`
     `
     clip-path: polygon(80% 0, 80% 45%, 100% 45%, 100% 100%, 0 100%, 0 0);
   `}
+
+  ${({ theme }) => theme?.breakpoints.down('sm')} {
+    width: 18px;
+    height: 18px;
+    border-width: 1.5px;
+  }
 `;
 
-const CheckIconStyled = styled(CheckIcon)<{ checked?: boolean }>`
+const CheckIconStyled = styled(CheckIcon)<{ checked?: boolean; theme?: Theme }>`
   position: absolute;
   bottom: 14px;
   left: 14px;
   color: #4caf50;
   transition: opacity 0.2s ease-in-out;
+
+  ${({ theme }) => theme?.breakpoints.down('sm')} {
+    bottom: 10px;
+    left: 12px;
+    width: 20px;
+  }
 `;
 
 export { CheckboxBase, CheckIconStyled };

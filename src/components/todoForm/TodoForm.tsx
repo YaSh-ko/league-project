@@ -44,7 +44,7 @@ export function TodoForm(props: TodoFormProps) {
 
   return (
     <Box component="form" onSubmit={handleSubmit(handlerFormSubmit)} display="flex" flexDirection="column" gap="20px">
-      <Typography variant="h5" fontWeight={500}>
+      <Typography variant="h5" component="h2" fontWeight={500}>
         {isEdit ? 'Редактирование задачи' : 'Новая задача'}
       </Typography>
 
@@ -71,6 +71,7 @@ export function TodoForm(props: TodoFormProps) {
         control={
           <Checkbox
             {...register('isImportant')}
+            aria-label={`${isImportant ? 'Сделать задачу неважной' : 'Сделать задачу важной'}`}
             checked={isImportant}
             icon={<GradeOutlinedIcon color="secondary" />}
             checkedIcon={<GradeIcon color="secondary" />}

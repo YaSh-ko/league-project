@@ -9,12 +9,9 @@ export const createAppTheme = (mode: PaletteMode) => {
         textTransform: 'none',
         fontWeight: 500,
       },
-      h1: { fontSize: 48, fontWeight: 800, '@media (max-width:400px)': { fontSize: 26 } },
+      h1: { fontSize: 48, fontWeight: 800, '@media (max-width:400px)': { fontSize: 22 } },
       h2: { fontSize: 32, fontWeight: 600 },
-      h3: { fontSize: 24, fontWeight: 600 },
-      h4: { fontSize: 22, fontWeight: 500 },
-      h5: { fontSize: 20, fontWeight: 500 },
-      h6: { fontSize: 16, fontWeight: 500 },
+      h3: { fontSize: 22, fontWeight: 600 },
     },
 
     shape: { borderRadius: 8 },
@@ -25,13 +22,13 @@ export const createAppTheme = (mode: PaletteMode) => {
         ? {
             // LIGHT
             primary: { main: '#121A2C', contrastText: '#F4F4F4' },
-            secondary: { main: '#FFC107' },
+            secondary: { main: '#F0C420' },
             background: { default: '#f5f5f5', paper: '#ffffff' },
             text: { primary: '#121A2C' },
           }
         : {
             // DARK
-            primary: { main: '#FFC107' },
+            primary: { main: '#F0C420' },
             background: { default: '#121212', paper: '#1E1E1E' },
             text: { primary: '#ffffff' },
           }),
@@ -104,11 +101,26 @@ export const createAppTheme = (mode: PaletteMode) => {
           },
         ],
       },
+
+      MuiFormControl: {
+        variants: [
+          {
+            props: { size: 'small' },
+            style: {
+              '& .MuiOutlinedInput-root': {
+                height: '50px',
+              },
+            },
+          },
+        ],
+      },
     },
   });
 
   // Затем делаем шрифты адаптивными
-  return responsiveFontSizes(theme);
+  return responsiveFontSizes(theme, {
+    factor: 4, // ← по умолчанию 2, увеличиваем до 3-5
+  });
 };
 
 export const lightTheme = createAppTheme('light');
