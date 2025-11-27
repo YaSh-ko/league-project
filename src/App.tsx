@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
-import { EditTodoPage } from './app/editTodoPage';
-import { AddTodoPage } from './app/addTodoPage';
-import { TodosListPage } from './app/todosListPage';
+import { EditTodoPage } from './app/EditTodoPage';
+import { AddTodoPage } from './app/AddTodoPage';
+import { TodosListPage } from './app/TodosListPage';
 import { SnackbarProvider } from './context/SnackBarContext';
 import { ThemeModeProvider } from './context/ThemeContext';
 import { Layout } from 'components/Layout';

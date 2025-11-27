@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TodoFilterType } from 'app/todosListPage/components/Filters';
+import { TodoFilterType } from 'app/TodosListPage/components/Filters';
 import { GetTodoParams } from 'types/todo.types';
 
 export function useTodosFilters() {
