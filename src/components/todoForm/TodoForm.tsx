@@ -8,7 +8,6 @@ import { TodoFormProps, EditTodoFormProps } from './TodoForm.types';
 import { CreateTodoDto, UpdateTodoDto } from 'types/todo.types';
 import { todoCreateSchema, todoUpdateSchema } from 'src/schemas/todoSchema';
 
-// Type guard для определения типа формы
 const isEditForm = (props: TodoFormProps): props is EditTodoFormProps => {
   return props.isEdit === true && 'todoId' in props;
 };
@@ -35,7 +34,6 @@ export function TodoForm(props: TodoFormProps) {
 
   const handlerFormSubmit = (data: CreateTodoDto | UpdateTodoDto) => {
     if (isEditForm(props)) {
-      // Для редактирования добавляем id к данным
       props.onSubmit(props.todoId, data as UpdateTodoDto);
     } else {
       props.onSubmit(data as CreateTodoDto);

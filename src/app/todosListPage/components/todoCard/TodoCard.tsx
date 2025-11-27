@@ -1,14 +1,4 @@
-import {
-  ListItem,
-  IconButton,
-  Checkbox,
-  Box,
-  Typography,
-  useMediaQuery,
-  useTheme,
-  Menu,
-  MenuItem,
-} from '@mui/material';
+import { IconButton, Box, Typography, useMediaQuery, useTheme, Menu, MenuItem } from '@mui/material';
 import GradeIcon from '@mui/icons-material/Grade';
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 import EditIcon from '@mui/icons-material/Edit';
@@ -103,7 +93,7 @@ export function TodoCard({ todo, onUpdateTodo, onDeleteTodo }: TodoCardProps) {
                     onDeleteTodo(Number(todo.id));
                     handleMenuClose();
                   }}>
-                  <DeleteOutlineIcon color="error" fontSize="small" />
+                  <DeleteOutlineIcon color="error" fontSize="small" style={{ marginRight: 1 }} />
                   Удалить
                 </MenuItem>
               </Menu>
@@ -141,6 +131,7 @@ export function TodoCard({ todo, onUpdateTodo, onDeleteTodo }: TodoCardProps) {
             fontWeight={200}
             component="p"
             style={{ wordWrap: 'break-word' }}
+            title="Описание задачи"
             aria-describedby={`todoTitle${todo.id}`}>
             {todo.info}
           </Typography>

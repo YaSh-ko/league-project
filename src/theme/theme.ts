@@ -1,7 +1,6 @@
 import { createTheme, PaletteMode, responsiveFontSizes } from '@mui/material';
 
 export const createAppTheme = (mode: PaletteMode) => {
-  // Сначала создаем базовую тему
   const theme = createTheme({
     typography: {
       fontFamily: '"Montserrat", sans-serif',
@@ -117,9 +116,8 @@ export const createAppTheme = (mode: PaletteMode) => {
     },
   });
 
-  // Затем делаем шрифты адаптивными
   return responsiveFontSizes(theme, {
-    factor: 4, // ← по умолчанию 2, увеличиваем до 3-5
+    factor: 4,
   });
 };
 

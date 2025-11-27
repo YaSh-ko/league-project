@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { TodosList } from './components/TodoList';
 import { Filters, TodoFilterType } from './components/Filters';
@@ -34,8 +34,6 @@ export function TodosListPage() {
     { value: 'completed', label: 'Выполненные' },
   ];
 
-  if (isLoading) return <p>Загрузка...</p>;
-
   return (
     <Box>
       <Filters
@@ -45,12 +43,32 @@ export function TodosListPage() {
         onChangeSearch={setSearch}
         filterOptions={filterOptions}
       />
-      <TodosList
-        todos={sortedTodos}
-        showLoading={showLoading}
-        onUpdateTodo={handleUpdateTodo}
-        onDeleteTodo={handleDeleteTodo}
-      />
+
+      <Box aria-live="polite" aria-atomic="true" mt={2}>
+        {isLoading && (
+          <Typography variant="body1" component="p" textAlign="center" color="text.secondary" py={4}>
+            Загрузка...
+          </Typography>
+        )}
+        {error && (
+          <Typography variant="body1" component="p" textAlign="center" color="text.secondary" py={4}>
+            Ошибка загрузки
+          </Typography>
+        )}
+        {!isLoading && !error && sortedTodos.length === 0 && (
+          <Typography variant="body1" component="p" textAlign="center" color="text.secondary" py={4}>
+            Задач пока нет
+          </Typography>
+        )}
+        {!isLoading && !error && sortedTodos.length > 0 && (
+          <TodosList
+            todos={sortedTodos}
+            showLoading={showLoading}
+            onUpdateTodo={handleUpdateTodo}
+            onDeleteTodo={handleDeleteTodo}
+          />
+        )}
+      </Box>
     </Box>
   );
 }
