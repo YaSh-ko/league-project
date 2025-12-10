@@ -83,10 +83,13 @@ npm run dev
 
 ## 📸 Скриншоты
 Добавьте изображения в `docs/screenshots/` и вставьте ссылки:
-```
-![Список задач](docs/screenshots/list.png)
-![Создание задачи](docs/screenshots/create.png)
-```
+
+Список задач
+<img width="1319" height="749" alt="image" src="https://github.com/user-attachments/assets/659983aa-a3e0-47ac-847d-894ff94186ae" />
+<img width="1239" height="702" alt="image" src="https://github.com/user-attachments/assets/256f5b29-9a37-4a66-9b16-5402976d3175" />
+
+Добавление задачи
+<img width="1203" height="751" alt="image" src="https://github.com/user-attachments/assets/61aaa78f-2ca5-4e5b-80ac-ee1d81a6be90" />
 
 ## 📬 Контакты
 - Email: yasha.kozhaev1.@mail.ru
